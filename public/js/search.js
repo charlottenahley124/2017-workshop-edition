@@ -11,6 +11,7 @@ var index = lunr(function () {
   this.field('layout')
   this.field('content')
   this.ref('id')
+  this.field('mode')
 });
 
 //Add to this index the proper metadata from the Jekyll content
@@ -21,6 +22,7 @@ index.add({
   title: {{text.title | jsonify}},
   author: {{text.author | jsonify}},
   content: {{text.content | jsonify | strip_html}},
+  mode: {{text.mode | jsonify}}, 
   id: {{count}}
 });{% assign count = count | plus: 1 %}{% endfor %}
 console.log( jQuery.type(index) );
@@ -33,7 +35,8 @@ var store = [{% for text in site.texts %}{
   "author": {{text.author | jsonify}},
   "layout": {{ text.layout | jsonify }},
   "link": {{text.url | jsonify}},
-  "excerpt": {{text.content | strip_html |remove: "-"| remove: "[TOC] | "| replace: '[diplomatic]', '<b>Translation</b>'| replace: '[translation]', '<b>Diplomatic</b>'| truncatewords: 20 | jsonify}}
+  "mode": {{text.mode | jsonify}}, 
+  "excerpt": {{text.content | strip_html |remove: "-"| remove: "[TOC] | "| replace: '[diplomatic]', '<b>diplomatic</b>'| replace: '[translation]', '<b>translation</b>'| truncatewords: 20 | jsonify}}
 }
 {% unless forloop.last %},{% endunless %}{% endfor %}]
 
@@ -41,42 +44,65 @@ var store = [{% for text in site.texts %}{
 
 var qd = {}; //Gets values from the URL
 location.search.substr(1).split("&").forEach(function(item) {
-    var s = item.split("="),
-        k = s[0],
-        v = s[1] && decodeURIComponent(s[1]);
-    (k in qd) ? qd[k].push(v) : qd[k] = [v]
+ var s = item.split("="),
+     k = s[0],
+     v = s[1] && decodeURIComponent(s[1]);
+ (k in qd) ? qd[k].push(v) : qd[k] = [v]
 });
-
+ 
 function doSearch() {
   var resultdiv = $('#results');
   var query = $('input#search').val();
 
-  //The search is then launched on the index built with Lunr
+ //The search is then launched on the index built with Lunr
   var result = index.search(query);
-                                             
-  resultdiv.empty();
-  if (result.length == 0) {
-    resultdiv.append('<p class="">No results found.</p>');
-  } else if (result.length == 1) {
-    resultdiv.append('<p class="">Found '+result.length+' result</p>');
-  } else {
-    resultdiv.append('<p class="">Found '+result.length+' results</p>');
-  }
-  //Loop through, match, and add results
-  for (var item in result) {
+ 
+ resultdiv.empty(); 
+ if (result.length == 0) {
+   resultdiv.append('<p class="">No results found.</p>');
+ } else if (result.length == 1) {
+   resultdiv.append('<p class="">Found '+result.length+' result</p>');
+ } else {
+   resultdiv.append('<p class="">Found '+result.length+' results</p>');
+ }
+ //Loop through, match, and add results
+ for (var item in result) {
     var ref = result[item].ref;
+ if($('input[name=tc]').is(':checked') && store[ref].mode === "tc"){
     var searchitem = '<div class="result"><a href="{{ site.baseurl }}'+store[ref].link+'?q='+query+'">'+store[ref].title+'</a>';
     var end = '<p>'+store[ref].excerpt+'</p></div>';
     searchitem += end;
     resultdiv.append(searchitem);
-   }
-  }
+ }
+ if($('input[name=tl]').is(':checked') && store[ref].mode === "tl"){
+    var searchitem = '<div class="result"><a href="{{ site.baseurl }}'+store[ref].link+'?q='+query+'">'+store[ref].title+'</a>';
+    var end = '<p>'+store[ref].excerpt+'</p></div>';
+    searchitem += end;
+    resultdiv.append(searchitem);
+ }
+ if($('input[name=tcn]').is('checked') && store[ref].mode === "tcn"){
+   var searchitem = '<div class="result"><a href="{{ site.baseurl }}'+store[ref].link+'?q='+query+'">'+store[ref].title+'</>';
+   var end = '<p>'+store[ref].excerpt+'</p></div>';
+   searchitem += end;
+   resultdiv.append(searchitem);
+ }
+ 
+ else if (!$('input[name=tl]').is(':checked') && !$('input[name=tc]').is(':checked')){
+    var searchitem = '<div class="result"><a href="{{ site.baseurl }}'+store[ref].link+'?q='+query+'">'+store[ref].title+'</a>';
+    var end = '<p>'+store[ref].excerpt+'</p></div>';
+    searchitem += end;
+    resultdiv.append(searchitem);
+ }
+ 
+ }
+ }
 
 
 $(document).ready(function() {
   if (qd.q) {
     $('input#search').val(qd.q[0]);
-    doSearch();
-  }
-  $('input#search').on('keyup', doSearch);
+     doSearch();
+ }
+ 
+ $('input#search').on('keyup', doSearch);
 });
