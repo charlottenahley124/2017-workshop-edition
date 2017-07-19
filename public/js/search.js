@@ -36,7 +36,7 @@ var store = [{% for text in site.texts %}{
   "layout": {{ text.layout | jsonify }},
   "link": {{text.url | jsonify}},
   "mode": {{text.mode | jsonify}}, 
-  "excerpt": {{text.content | strip_html |remove: "-"| remove: "[TOC] | "| replace: '[diplomatic]', '<b>Translation</b>'| replace: '[translation]', '<b>Diplomatic</b>'| truncatewords: 20 | jsonify}}
+  "excerpt": {{text.content | strip_html |remove: "-"| remove: "[TOC] | "| replace: '[translation]', '<b>Diplomatic</b>'| replace: '[diplomatic]', '<b>Translation</b>'| truncatewords: 20 | jsonify}}
 }
 {% unless forloop.last %},{% endunless %}{% endfor %}]
 
