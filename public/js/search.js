@@ -104,7 +104,7 @@ resultdiv.empty();
    }
 
  }
- resultdiv.append('<p class="">No results found.</p>');
+ resultdiv.append('<p class="">Results Found</p>');
  } //Search ends 
 
 
