@@ -57,15 +57,15 @@ function doSearch() {
 
  //The search is then launched on the index built with Lunr
  var result = index.search(query);
+ var resultnumber = 0; 
  
 
-/* resultdiv.empty();
+resultdiv.empty();
  if (result.length == 0) {
  resultdiv.append('<p class="">No results found.</p>');
- }else{
+ 
   
  } 
-*/
 var $block = $('.no-results');
 $(".my-textbox").keyup(function() {
     var val = $(this).val();
@@ -82,13 +82,7 @@ $(".my-textbox").keyup(function() {
 }); 
  
  
-/*var answer = resultdiv;
- for (answer in result.length) {
-  if (answer == resultdiv.full){
-   console.log(answer);
-  }
- }
-*/
+   
  //Loop through, match, and add results
  for (var item in result) {
  var ref = result[item].ref;
@@ -97,6 +91,7 @@ $(".my-textbox").keyup(function() {
  var end = '<p>'+store[ref].excerpt+'</p></div>';
  searchitem += end;
  resultdiv.append(searchitem);
+ resultnumber += 1;
  }
  
  if($('input[name=tcn]').is(':checked') && store[ref].mode == "tcn"){
@@ -104,6 +99,7 @@ $(".my-textbox").keyup(function() {
  var end = '<p>'+store[ref].excerpt+'</p></div>';
  searchitem += end;
  resultdiv.append(searchitem);
+ resultnumber += 1;
  }
 
  if($('input[name=tl]').is(':checked') && store[ref].mode == "tl"){
@@ -111,6 +107,7 @@ $(".my-textbox").keyup(function() {
  var end = '<p>'+store[ref].excerpt+'</p></div>';
  searchitem += end;
  resultdiv.append(searchitem);
+ resultnumber += 1; 
  }
  
  if(!$('input[name=tc]').is(':checked') && !$('input[name=tcn]').is(':checked') && !$('input[name=tl]').is(':checked')){
@@ -118,6 +115,7 @@ $(".my-textbox").keyup(function() {
  var end = '<p>'+store[ref].excerpt+'</p></div>';
  searchitem += end;
  resultdiv.append(searchitem);
+ resultnumber += 1; 
  }
  
  }
