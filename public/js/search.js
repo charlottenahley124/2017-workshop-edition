@@ -62,6 +62,9 @@ function doSearch() {
  if (result.length == 0) {
  resultdiv.append('<p class="">No results found.</p>');
  } 
+ var inte = 0;
+ var integrate = inte + 1;
+ 
  //Loop through, match, and add results
  for (var item in result) {
  var ref = result[item].ref;
