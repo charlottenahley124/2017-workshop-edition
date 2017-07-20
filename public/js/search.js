@@ -70,15 +70,10 @@ var $block = $('.no-results');
 $(".my-textbox").keyup(function() {
     var val = $(this).val();
     var isMatch = false;
-
-    $(".personsMenu li").each(function(i) {
-        var content = $(this).html();
-        if(content.toLowerCase().indexOf(val) == -1) {
-           $(this).hide();           
-
-        } else {
-            isMatch = true;
-            $(this).show();
+ 
+     } else {
+        isMatch = true;
+        $(this).show();
 
         }
     });
