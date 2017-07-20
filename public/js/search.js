@@ -62,6 +62,26 @@ function doSearch() {
  if (result.length == 0) {
  resultdiv.append('<p class="">No results found.</p>');
  } 
+ 
+ var $block = $('.no-results');
+$(".my-textbox").keyup(function() {
+    var val = $(this).val();
+    var isMatch = false;
+
+    $(".personsMenu li").each(function(i) {
+        var content = $(this).html();
+        if(content.toLowerCase().indexOf(val) == -1) {
+           $(this).hide();           
+
+        } else {
+            isMatch = true;
+            $(this).show();
+
+        }
+    });
+
+    $block.toggle(!isMatch);
+});
  /*var inte = 0;
  var integrate = inte + 1;
  */
