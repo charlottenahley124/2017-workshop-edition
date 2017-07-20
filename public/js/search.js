@@ -58,11 +58,6 @@ function doSearch() {
  //The search is then launched on the index built with Lunr
  var result = index.search(query);
  
- resultdiv.empty();
- if (result.length == 0) {
- resultdiv.append('<p class="">No results found.</p>');
- } 
- 
  var $block = $('.no-results');
 $(".my-textbox").keyup(function() {
     var val = $(this).val();
@@ -82,6 +77,13 @@ $(".my-textbox").keyup(function() {
 
     $block.toggle(!isMatch);
 });
+ 
+ resultdiv.empty();
+ if (result.length == 0) {
+ resultdiv.append('<p class="">No results found.</p>');
+ } 
+ 
+ 
  /*var inte = 0;
  var integrate = inte + 1;
  */
