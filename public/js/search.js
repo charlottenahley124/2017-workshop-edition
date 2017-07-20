@@ -59,20 +59,41 @@ function doSearch() {
  var result = index.search(query);
  
 
- resultdiv.empty();
+/* resultdiv.empty();
  if (result.length == 0) {
  resultdiv.append('<p class="">No results found.</p>');
+ }else{
+  
  } 
-var answer = resultdiv;
+*/
+var $block = $('.no-results');
+$(".my-textbox").keyup(function() {
+    var val = $(this).val();
+    var isMatch = false;
+
+    $(".personsMenu li").each(function(i) {
+        var content = $(this).html();
+        if(content.toLowerCase().indexOf(val) == -1) {
+           $(this).hide();           
+
+        } else {
+            isMatch = true;
+            $(this).show();
+
+        }
+    });
+
+    $block.toggle(!isMatch);
+}); 
+ 
+ 
+/*var answer = resultdiv;
  for (answer in result.length) {
   if (answer == resultdiv.full){
    console.log(answer);
   }
  }
- 
- /*var inte = 0;
- var integrate = inte + 1;
- */
+*/
  //Loop through, match, and add results
  for (var item in result) {
  var ref = result[item].ref;
