@@ -104,7 +104,7 @@ resultdiv.empty();
    }
 
  }
- resultdiv.append('<p class=""> Found'+resultnumber+' results </p>');
+ resultdiv.append('<p class=""> Found '+resultnumber+' results </p>');
  } //Search ends 
 
 
