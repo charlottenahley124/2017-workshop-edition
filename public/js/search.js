@@ -105,6 +105,8 @@ resultdiv.empty();
 
  }
  resultdiv.append('<p class=""> Found '+resultnumber+' results </p>');
+ if(resultnumber == 0){
+  resultnumber.append('<p class=""> </p>');
  } //Search ends 
 
 
