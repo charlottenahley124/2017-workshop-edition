@@ -59,13 +59,8 @@ function doSearch() {
  var result = index.search(query);
  var resultnumber = 0; 
  
-
 resultdiv.empty();
 
-
- 
- 
-   
  //Loop through, match, and add results
  for (var item in result) {
  var ref = result[item].ref;
