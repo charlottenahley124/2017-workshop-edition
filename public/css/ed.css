@@ -43,8 +43,8 @@ html {
 }
 
 body {
-  color: #454545;
-  background-color: #fff;
+  color: #454554; /*45  fff */
+  background-color: #ffg;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
