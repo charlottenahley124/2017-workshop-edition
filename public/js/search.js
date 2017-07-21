@@ -109,8 +109,8 @@ resultdiv.empty();
   
   if(resultnumber == 1){
    resultdiv.append('<p class=""> Found 1 result </p>');
-
- }
+  }
+  }
  } //Search ends 
 
 
