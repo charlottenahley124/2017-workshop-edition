@@ -104,7 +104,7 @@ resultdiv.empty();
    }
 
  }
-  if(resultnumber != 0){
+  if(resultnumber != 0 && resultnumber != 1){
    resultdiv.append('<p class=""> Found '+resultnumber+' results </p>');
   else if(resultnumber == 1){
    resultdiv.append('<p class=""> Found 1 result </p>');
