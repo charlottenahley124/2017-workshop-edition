@@ -61,9 +61,7 @@ function doSearch() {
  
 
 resultdiv.empty();
- if (result.length == 0) {
- resultdiv.append('<p class="">No results found.</p>');
- } 
+
 
  
  
@@ -104,13 +102,17 @@ resultdiv.empty();
    }
 
  }
-  if(resultnumber != 0 || resultnumber != 1){
-   resultdiv.append('<p class=""> Found '+resultnumber+' results </p>');
-  } else if(resultnumber == 1){
+ 
+  if (resultnumber == 0) {
+ resultdiv.append('<p class="">No results found.</p>');
+ } 
+ else if(resultnumber == 1){
    resultdiv.append('<p class=""> Found 1 result </p>');
   }
- } //Search ends 
-
+else{
+ resultdiv.append('<p class=""> Found '+resultnumber+' results </p>');
+}
+  
 
 $(document).ready(function() {
  if (qd.q) {
