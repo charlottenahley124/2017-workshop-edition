@@ -108,8 +108,7 @@ resultdiv.empty();
  } 
  else if(resultnumber == 1){
    resultdiv.append('<p class=""> Found 1 result </p>');
-  }
-else{
+ }else{
  resultdiv.append('<p class=""> Found '+resultnumber+' results </p>');
 }
   
