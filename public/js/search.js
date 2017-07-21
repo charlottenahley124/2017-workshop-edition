@@ -106,7 +106,7 @@ resultdiv.empty();
  }else{
  resultdiv.append('<p class=""> Found '+resultnumber+' results </p>');
 }
-  
+} 
 
 $(document).ready(function() {
  if (qd.q) {
